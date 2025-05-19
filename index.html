@@ -2,15 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FoodPOS</title>
 </head>
 
 <body>
     <span>Select Cuisine: </span>
     <select name="" id="cuisine" onchange="fillDishesDD()">
-        <option value="null">-Select Cuisine-</option>
+        <!-- <option value="null">-Select Cuisine-</option> -->
         <option value="north-indian">North Indian</option>
         <option value="south-indian">South Indian</option>
         <option value="french">French</option>
@@ -154,6 +152,9 @@
 
         var selectedCuisine;
         var selectedDish;
+// run on first load
+        fillDishesDD()
+        displayData()
 
         function filterDishes(cuisineValue){
             return cuisineValue.cuisine == cuisine.value
@@ -163,7 +164,7 @@
             dish.innerHTML = "";
 
             selectedCuisine = dishDB.filter(filterDishes)
-            console.log("108: var selectedCuisine", selectedCuisine)
+            // console.log("167: inside fn fillDishesDD \n selectedCuisine", selectedCuisine)
 
             // on a loop add option with dish name from array
             for (let i = 0; i < selectedCuisine.length; i++) {
@@ -172,16 +173,25 @@
                 option.value = selectedCuisine[i].price;
                 dish.appendChild(option);
             }
-        }
-
-        function displayData(){
+            // console.log("178: fillDishesDD fn ", selectedCuisine[dish.selectedIndex])
 
             selectedDish = selectedCuisine[dish.selectedIndex]
-            // console.log(selectedDish)
+
+            displayData(selectedDish)
+        
+        }
+
+        function displayData(selectedDish){
+            if (selectedDish == undefined) {
+                selectedDish = selectedCuisine[dish.selectedIndex]
+            }
+
+            // selectedDish = selectedCuisine[dish.selectedIndex]
+            // console.log("184: ",selectedDish)
 
             var htm = `
             <br>
-            <img src="${selectedDish.img}" alt="" width="500" border="1px">
+            <img src="${selectedDish.img}" alt="" width="500" height="350" border="1px">
             <h1><b>${selectedDish.name}</b>: &#8377; ${selectedDish.price}</h1>
 
             <input type="text" value="" placeholder="Enter Quantity" id="qty">
