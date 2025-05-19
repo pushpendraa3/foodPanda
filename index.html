@@ -25,6 +25,21 @@
     <center id="centerBox"></center>
 
     <center id="tableBox"></center>
+<hr>
+    <form onsubmit="formSubmit()">
+        Cuisine: 
+        <select name="" id="form-cuisine" onchange="">
+        <option value="north-indian">North Indian</option>
+        <option value="south-indian">South Indian</option>
+        <option value="french">French</option>
+        <option value="italian">Italian</option>
+        </select>
+        <br>
+        <br>
+        Name: <input type="text" name="" id="formName" value="">
+        Price: <input type="text" name="" id="formPrice" value="">
+        <button type="submit">Submit</button>
+    </form>
 
     <script>
         var dishDB = [{
@@ -156,12 +171,18 @@
         fillDishesDD()
         displayData()
 
+        localStorage.clear()
+        localStorage.setItem("localData", JSON.stringify(dishDB));
+
+        dishDB = JSON.parse(localStorage.getItem("localData"))
+
         function filterDishes(cuisineValue){
             return cuisineValue.cuisine == cuisine.value
         }
 
         function fillDishesDD() {
             dish.innerHTML = "";
+            
 
             selectedCuisine = dishDB.filter(filterDishes)
             // console.log("167: inside fn fillDishesDD \n selectedCuisine", selectedCuisine)
@@ -240,6 +261,13 @@
 
         }
 
+        function formSubmit() {
+            console.log("form submitted")
+
+            // get values from dom 
+            // make a object
+            // append to dishDD in local storage
+        }
     </script>
 </body>
 
