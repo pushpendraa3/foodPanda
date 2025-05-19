@@ -3,6 +3,6 @@
 - [X] on first load, screen should have data of dosa 
 - [ ] add a form to add cousines
 - [ ] add form validation
-- [ ] store dishes, cuisines using localStorage
+- [x] store dishes, cuisines using localStorage
 - [ ] add modal popup
 - [ ] Later: Harkirat week 1, 2 basic js, 8 Tailwind

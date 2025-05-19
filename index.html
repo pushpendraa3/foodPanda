@@ -165,7 +165,7 @@
         }
     ]
 
-        var selectedCuisine;
+        var selectedCuisine; 
         var selectedDish;
 // run on first load
         fillDishesDD()
@@ -174,7 +174,7 @@
         localStorage.clear()
         localStorage.setItem("localData", JSON.stringify(dishDB));
 
-        dishDB = JSON.parse(localStorage.getItem("localData"))
+        // grab viewBill button and add calucateBill() on click
 
         function filterDishes(cuisineValue){
             return cuisineValue.cuisine == cuisine.value
@@ -183,6 +183,7 @@
         function fillDishesDD() {
             dish.innerHTML = "";
             
+            dishDB = JSON.parse(localStorage.getItem("localData")) 
 
             selectedCuisine = dishDB.filter(filterDishes)
             // console.log("167: inside fn fillDishesDD \n selectedCuisine", selectedCuisine)
@@ -199,16 +200,25 @@
             selectedDish = selectedCuisine[dish.selectedIndex]
 
             displayData(selectedDish)
+
+            console.log("selectedDish from fillDishesDD", selectedDish)
         
         }
 
         function displayData(selectedDish){
-            if (selectedDish == undefined) {
-                selectedDish = selectedCuisine[dish.selectedIndex]
-            }
+            dishDB = JSON.parse(localStorage.getItem("localData"))
+
+            selectedDish = selectedCuisine[dish.selectedIndex]
+
+            console.log("selectedDish from displayData", selectedDish)
+
+            // if (selectedDish == undefined) {
+            //     selectedDish = selectedCuisine[dish.selectedIndex]
+            // }
 
             // selectedDish = selectedCuisine[dish.selectedIndex]
-            // console.log("184: ",selectedDish)
+            console.log("inside fn displayData 217: ",selectedDish)
+            console.log(selectedDish.name, selectedDish.price)
 
             var htm = `
             <br>
@@ -221,11 +231,26 @@
             <br><br>
         `
             document.querySelector("#centerBox").innerHTML = htm
+
+            // save to localstorage using new key 
+            localStorage.setItem("selectedDish", JSON.stringify(selectedDish));
         }
 
+        // this fn works on selectedDish from global scope
         function calculateBill(){
+
+            selectedDish = JSON.parse(localStorage.getItem("selectedDish"))
+
+            console.log("selectedDish from calculateBill", selectedDish)
+
+            console.log("inside fn calculateBill", selectedDish)
+            console.log("inside fn calculateBill", selectedDish.name, selectedDish.price)
+
             var qty = document.querySelector("#qty").value 
             var tip = document.querySelector("#tip").value
+                if (tip === "") {
+                    tip = 0
+                }
             var gst = selectedDish.price * qty * 5 / 100
             var totalBill = Math.round((selectedDish.price * qty) + gst + parseInt(tip))
             // console.log(selectedDish.price, gst, qty, tip, totalBill)
@@ -262,7 +287,7 @@
         }
 
         function formSubmit() {
-            console.log("form submitted")
+            // console.log("form submitted")
 
             var formCuisine = document.querySelector("#formCuisine").value
             var formName = document.querySelector("#formName").value
@@ -275,7 +300,7 @@
             img: "assets/dosa.jpg"
         }
 
-        console.log("inside fn formSubmit \n objToAppend: ", objToAppend)
+        // console.log("inside fn formSubmit \n objToAppend: ", objToAppend)
 
             var localDishDB = JSON.parse(localStorage.getItem("localData"))
             localDishDB.push(objToAppend)
@@ -283,7 +308,7 @@
             localStorage.clear()
         localStorage.setItem("localData", JSON.stringify(localDishDB));
 
-            console.log("saved to localStorage: ",objToAppend)
+            // console.log("saved to localStorage: ",objToAppend)
 
             // document.querySelector("#formCuisine").value = ""
             document.querySelector("#formName").value = ""
@@ -292,6 +317,8 @@
             // get values from dom 
             // make a object
             // append to dishDD in local storage
+        //     fillDishesDD()
+        // displayData()
         }
     </script>
 </body>
