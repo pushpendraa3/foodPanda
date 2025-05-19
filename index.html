@@ -168,7 +168,7 @@
         fillDishesDD()
         displayData()
 
-        localStorage.clear()
+        localStorage.setItem("localData", "")
         localStorage.setItem("localData", JSON.stringify(dishDB));
 
         function filterDishes(cuisineValue){
