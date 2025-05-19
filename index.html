@@ -29,7 +29,7 @@
     <center id="tableBox"></center>
 
     <script>
-        var southIndianDishes = [{
+        var dishDB = [{
             cuisine: "south-indian",
             name: "Dosa",
             price: 240,
@@ -51,12 +51,12 @@
             img: "assets/kerala-prawn-curry.jpg"
         }, {
             name: "Medu Vada",
-            cuisine: "south Indian",
+            cuisine: "south-indian",
             price: 250,
             img: "assets/medu-vada.jpg"
         }, {
             name: "Uttapam",
-            cuisine: "south-Indian",
+            cuisine: "south-indian",
             price: 120,
             img: "assets/uttapam.jpg"
         },{
@@ -94,26 +94,23 @@
         var selectedCuisine;
         var selectedDish;
 
-        function filterDishes(){
-
+        function filterDishes(cuisineValue){
+            return cuisineValue.cuisine == cuisine.value
+            // console.log(, cuisineValue.name)
+            // console.log(cuisineValue) //cuisineValue is an object
+            
+            
         }
         function fillDishesDD() {
             dish.innerHTML = "";
 
-            selectedCuisine = cuisine.value
-            // selectedCuisine = filterDishes(cuisine.value)
-            console.log(cuisine.value)
-            console.log(selectedCuisine)
+            // selectedCuisine = cuisine.value
+            selectedCuisine = dishDB.filter(filterDishes)
+            // console.log(cuisine.value) // working As EXPECTED
+            // console.log(selectedCuisine) //working AS EXPECTED
 
-            switch (selectedCuisine) {
-                case 2:
-                    selectedCuisine = southIndianDishes
-                    break;
-
-                default:
-                    break;
-            } 
-            //todo: apply code to filter array on cuisine from obj and cuisine.value from dom
+            
+          
 
             // on a loop add option with dish name from array
             for (let i = 0; i < selectedCuisine.length; i++) {
