@@ -89,18 +89,76 @@
             cuisine: "italian",
             price: 599,
             img: "assets/mmilanese-risotto.jpg"
-        }]
+        }, {
+            name: "Aloo Kulcha",
+            cuisine: "north-indian",
+            price: 190,
+            img: "assets/aloo-kulcha.jpg"
+        }, {
+            name: "Kurkuri Bhindi",
+            cuisine: "north-indian",
+            price: 180,
+            img: "assets/kurkuri-bhindi.jpg"
+        }, {
+            name: "Methi Mushroom",
+            cuisine: "north-indian",
+            price: 160,
+            img: "assets/methi-mushroom.jpg"
+        }, {
+            name: "Methi Paratha ",
+            cuisine: "north-indian",
+            price: 160,
+            img: "assets/methi-paratha.jpg"
+        }, {
+            name: "Motichoor Laddu",
+            cuisine: "north-indian",
+            price: 150,
+            img: "assets/motichoor-ladoo.jpg"
+        }, {
+            name: "Sooji Halwa",
+            cuisine: "north-indian",
+            price: 140,
+            img: "assets/sooji-halwa.jpg"
+        }, {
+            name: "Veg Makhanwala",
+            cuisine: "north-indian",
+            price: 199,
+            img: "assets/veg-makhanwala.jpg"
+        }, {
+            name: "Chicken Confit",
+            cuisine: "french",
+            price: 610,
+            img: "assets/chicken-confit.jpg"
+        }, {
+            name: "Croque Monsieur",
+            cuisine: "french",
+            price: 620,
+            img: "assets/croque-monsieur.jpg"
+        }, {
+            name: "French Onion Soup",
+            cuisine: "french",
+            price: 610,
+            img: "assets/french-onion-soup.jpg"
+        }, {
+            name: "Quich Lorraine",
+            cuisine: "french",
+            price: 610,
+            img: "assets/quich-lorraine.jpg"
+        }, {
+            name: "Steak Frites",
+            cuisine: "french",
+            price: 610,
+            img: "assets/steak-frites.jpg"
+        }
+    ]
 
         var selectedCuisine;
         var selectedDish;
 
         function filterDishes(cuisineValue){
             return cuisineValue.cuisine == cuisine.value
-            // console.log(, cuisineValue.name)
-            // console.log(cuisineValue) //cuisineValue is an object
-            
-            
         }
+
         function fillDishesDD() {
             dish.innerHTML = "";
 
