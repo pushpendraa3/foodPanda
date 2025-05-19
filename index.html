@@ -26,9 +26,9 @@
 
     <center id="tableBox"></center>
 <hr>
-    <form onsubmit="formSubmit()">
+    <form onsubmit="return false">
         Cuisine: 
-        <select name="" id="form-cuisine" onchange="">
+        <select name="" id="formCuisine" onchange="">
         <option value="north-indian">North Indian</option>
         <option value="south-indian">South Indian</option>
         <option value="french">French</option>
@@ -38,7 +38,7 @@
         <br>
         Name: <input type="text" name="" id="formName" value="">
         Price: <input type="text" name="" id="formPrice" value="">
-        <button type="submit">Submit</button>
+        <button type="submit" onclick="formSubmit()">Submit</button>
     </form>
 
     <script>
@@ -263,6 +263,31 @@
 
         function formSubmit() {
             console.log("form submitted")
+
+            var formCuisine = document.querySelector("#formCuisine").value
+            var formName = document.querySelector("#formName").value
+            var formPrice = parseInt(document.querySelector("#formPrice").value)
+
+            var objToAppend = {
+            cuisine: formCuisine,
+            name: formName,
+            price: formPrice,
+            img: "assets/dosa.jpg"
+        }
+
+        console.log("inside fn formSubmit \n objToAppend: ", objToAppend)
+
+            var localDishDB = JSON.parse(localStorage.getItem("localData"))
+            localDishDB.push(objToAppend)
+
+            localStorage.clear()
+        localStorage.setItem("localData", JSON.stringify(localDishDB));
+
+            console.log("saved to localStorage: ",objToAppend)
+
+            // document.querySelector("#formCuisine").value = ""
+            document.querySelector("#formName").value = ""
+            document.querySelector("#formPrice").value = ""
 
             // get values from dom 
             // make a object
