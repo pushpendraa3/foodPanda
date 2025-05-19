@@ -33,21 +33,76 @@
             cuisine: "south-indian",
             name: "Dosa",
             price: 240,
-            img: "assets/Idli.jpg"
+            img: "assets/dosa.jpg"
         }, {
             name: "Idli",
             cuisine: "south-indian",
             price: 190,
             img: "assets/Idli.jpg"
+        }, {
+            name: "Fish Molee",
+            cuisine: "south-indian",
+            price: 290,
+            img: "assets/fish-molee.jpg"
+        }, {
+            name: "Kerala Prawn Curry",
+            cuisine: "south-indian",
+            price: 390,
+            img: "assets/kerala-prawn-curry.jpg"
+        }, {
+            name: "Medu Vada",
+            cuisine: "south Indian",
+            price: 250,
+            img: "assets/medu-vada.jpg"
+        }, {
+            name: "Uttapam",
+            cuisine: "south-Indian",
+            price: 120,
+            img: "assets/uttapam.jpg"
+        },{
+            name: "Agnolotti Del Plin",
+            cuisine: "italian",
+            price: 520,
+            img: "assets/Agnolotti-Del-Plin.jpg"
+        },{
+            name: "Braciole",
+            cuisine: "italian",
+            price: 580,
+            img: "assets/Braciole.jpg"
+        },{
+            name: "Chicken Scarpariello",
+            cuisine: "italian",
+            price: 480,
+            img: "assets/Chicken-Scarpariello.jpg"
+        },{
+            name: "Florentine Butter Chicken",
+            cuisine: "italian",
+            price: 640,
+            img: "assets/florentine-butter-chicken.jpg"
+        },{
+            name: "Italian Wedding Risotto",
+            cuisine: "italian",
+            price: 590,
+            img: "assets/italian-wedding-risotto.jpg"
+        },{
+            name: "Milanese Risotto",
+            cuisine: "italian",
+            price: 599,
+            img: "assets/mmilanese-risotto.jpg"
         }]
 
         var selectedCuisine;
         var selectedDish;
 
+        function filterDishes(){
+
+        }
         function fillDishesDD() {
             dish.innerHTML = "";
 
-            selectedCuisine = cuisine.selectedIndex
+            selectedCuisine = cuisine.value
+            // selectedCuisine = filterDishes(cuisine.value)
+            console.log(cuisine.value)
             console.log(selectedCuisine)
 
             switch (selectedCuisine) {
