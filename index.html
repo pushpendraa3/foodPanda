@@ -11,10 +11,10 @@
     <span>Select Cuisine: </span>
     <select name="" id="cuisine" onchange="fillDishesDD()">
         <option value="null">-Select Cuisine-</option>
-        <option value="">North Indian</option>
-        <option value="">South Indian</option>
-        <option value="">French</option>
-        <option value="">Italian</option>
+        <option value="north-indian">North Indian</option>
+        <option value="south-indian">South Indian</option>
+        <option value="french">French</option>
+        <option value="italian">Italian</option>
     </select>
     <br>
     <br>
@@ -30,14 +30,17 @@
 
     <script>
         var southIndianDishes = [{
+            cuisine: "south-indian",
             name: "Dosa",
             price: 240,
-            img: "Idli.jpg"
+            img: "assets/Idli.jpg"
         }, {
             name: "Idli",
+            cuisine: "south-indian",
             price: 190,
-            img: "Idli.jpg"
+            img: "assets/Idli.jpg"
         }]
+
         var selectedCuisine;
         var selectedDish;
 
@@ -54,7 +57,9 @@
 
                 default:
                     break;
-            }
+            } 
+            //todo: apply code to filter array on cuisine from obj and cuisine.value from dom
+
             // on a loop add option with dish name from array
             for (let i = 0; i < selectedCuisine.length; i++) {
                 var option = document.createElement("option");
