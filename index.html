@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodPOS</title>
+</head>
+
+<body>
+    <span>Select Cuisine: </span>
+    <select name="" id="cuisine" onchange="fillDishesDD()">
+        <option value="null">-Select Cuisine-</option>
+        <option value="">North Indian</option>
+        <option value="">South Indian</option>
+        <option value="">French</option>
+        <option value="">Italian</option>
+    </select>
+    <br>
+    <br>
+    <span>Select Dish</span>
+    <select name="" id="dish" onchange="displayData()">
+        <option value="">-Select Dish-</option>
+
+    </select>
+
+    <center id="centerBox"></center>
+
+    <center id="tableBox"></center>
+
+    <script>
+        var southIndianDishes = [{
+            name: "Dosa",
+            price: 240,
+            img: "Idli.jpg"
+        }, {
+            name: "Idli",
+            price: 190,
+            img: "Idli.jpg"
+        }]
+        var selectedCuisine;
+        var selectedDish;
+
+        function fillDishesDD() {
+            dish.innerHTML = "";
+
+            selectedCuisine = cuisine.selectedIndex
+            console.log(selectedCuisine)
+
+            switch (selectedCuisine) {
+                case 2:
+                    selectedCuisine = southIndianDishes
+                    break;
+
+                default:
+                    break;
+            }
+            // on a loop add option with dish name from array
+            for (let i = 0; i < selectedCuisine.length; i++) {
+                var option = document.createElement("option");
+                option.text = selectedCuisine[i].name;
+                option.value = selectedCuisine[i].price;
+                dish.appendChild(option);
+            }
+            // console.log()
+        }
+
+        function displayData(){
+            // console.log(selectedCuisine)
+
+            selectedDish = selectedCuisine[dish.selectedIndex]
+            console.log(selectedDish)
+
+
+            var htm = `
+            <br>
+            <img src="${selectedDish.img}" alt="" width="500" border="1px">
+            <h1><b>${selectedDish.name}</b>: &#8377; ${selectedDish.price}</h1>
+
+            <input type="text" value="" placeholder="Enter Quantity" id="qty">
+            <input type="text" value="" placeholder="Tip" id="tip">
+            <button type="button" onclick="calculateBill()">View Bill</button>
+            <br><br>
+        `
+            document.querySelector("#centerBox").innerHTML = htm
+            
+            // generateData(selectedDish)
+        }
+
+        function calculateBill(){
+            var qty = document.querySelector("#qty").value 
+            var tip = document.querySelector("#tip").value
+            var gst = selectedDish.price * qty * 5 / 100
+            var totalBill = Math.round((selectedDish.price * qty) + gst + parseInt(tip))
+            console.log(selectedDish.price, gst, qty, tip, totalBill)
+
+
+            var tableElem = `
+                <table border="4" width="410">
+            <tr>
+                <td>Rate</td>
+                <td>${selectedDish.price}</td>
+            </tr>
+            <tr>
+                <td>Quantity</td>
+                <td>${qty}</td>
+
+            </tr>
+            <tr>
+                <td>GST 5%</td>
+                <td>${gst}</td>
+
+            </tr>
+            <tr>
+                <td>Tip</td>
+                <td>${tip}</td>
+            </tr>
+            <tr>
+                <td>Total Amount</td>
+                <td><b>${totalBill}</b></td>
+            </tr>
+        </table>
+            `
+            document.querySelector("#tableBox").innerHTML = tableElem
+
+        }
+
+
+        // ________________________________________
+        // displayData()
+        // selectedCuisine already has array of dishes
+        //    var selectedDish = selectedCuisine[dish.selectedIndex] is name of dish selected 
+
+        // call generateData(selectedDish) with selectedDish
+        // 
+
+
+        // generateData(dish)
+        // generate
+        
+        // grab & assign
+
+        centerbox.innerHTML = htm
+        
+
+
+        // calculateBill(amount, tip, qty)
+
+        // generateBillTable()
+    </script>
+</body>
+
+</html>
