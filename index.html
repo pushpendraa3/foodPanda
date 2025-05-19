@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>FoodPOS</title>
 </head>
-
 <body>
     <span>Select Cuisine: </span>
     <select name="" id="cuisine" onchange="fillDishesDD()">
@@ -21,9 +19,7 @@
         <option value="">-Select Dish-</option>
 
     </select>
-
     <center id="centerBox"></center>
-
     <center id="tableBox"></center>
 <hr>
     <form onsubmit="return false">
@@ -167,14 +163,13 @@
 
         var selectedCuisine; 
         var selectedDish;
-// run on first load
+
+        // run on first load
         fillDishesDD()
         displayData()
 
         localStorage.clear()
         localStorage.setItem("localData", JSON.stringify(dishDB));
-
-        // grab viewBill button and add calucateBill() on click
 
         function filterDishes(cuisineValue){
             return cuisineValue.cuisine == cuisine.value
@@ -186,45 +181,26 @@
             dishDB = JSON.parse(localStorage.getItem("localData")) 
 
             selectedCuisine = dishDB.filter(filterDishes)
-            // console.log("167: inside fn fillDishesDD \n selectedCuisine", selectedCuisine)
 
-            // on a loop add option with dish name from array
             for (let i = 0; i < selectedCuisine.length; i++) {
                 var option = document.createElement("option");
                 option.text = selectedCuisine[i].name;
                 option.value = selectedCuisine[i].price;
                 dish.appendChild(option);
             }
-            // console.log("178: fillDishesDD fn ", selectedCuisine[dish.selectedIndex])
 
             selectedDish = selectedCuisine[dish.selectedIndex]
-
             displayData(selectedDish)
-
-            console.log("selectedDish from fillDishesDD", selectedDish)
-        
         }
 
         function displayData(selectedDish){
             dishDB = JSON.parse(localStorage.getItem("localData"))
-
             selectedDish = selectedCuisine[dish.selectedIndex]
-
-            console.log("selectedDish from displayData", selectedDish)
-
-            // if (selectedDish == undefined) {
-            //     selectedDish = selectedCuisine[dish.selectedIndex]
-            // }
-
-            // selectedDish = selectedCuisine[dish.selectedIndex]
-            console.log("inside fn displayData 217: ",selectedDish)
-            console.log(selectedDish.name, selectedDish.price)
 
             var htm = `
             <br>
             <img src="${selectedDish.img}" alt="" width="500" height="350" border="1px">
             <h1><b>${selectedDish.name}</b>: &#8377; ${selectedDish.price}</h1>
-
             <input type="text" value="" placeholder="Enter Quantity" id="qty">
             <input type="text" value="" placeholder="Tip" id="tip">
             <button type="button" onclick="calculateBill()">View Bill</button>
@@ -236,15 +212,10 @@
             localStorage.setItem("selectedDish", JSON.stringify(selectedDish));
         }
 
-        // this fn works on selectedDish from global scope
+        // this fn works on selectedDish from local Storage
         function calculateBill(){
 
             selectedDish = JSON.parse(localStorage.getItem("selectedDish"))
-
-            console.log("selectedDish from calculateBill", selectedDish)
-
-            console.log("inside fn calculateBill", selectedDish)
-            console.log("inside fn calculateBill", selectedDish.name, selectedDish.price)
 
             var qty = document.querySelector("#qty").value 
             var tip = document.querySelector("#tip").value
@@ -253,8 +224,6 @@
                 }
             var gst = selectedDish.price * qty * 5 / 100
             var totalBill = Math.round((selectedDish.price * qty) + gst + parseInt(tip))
-            // console.log(selectedDish.price, gst, qty, tip, totalBill)
-
 
             var tableElem = `
                 <table border="4" width="410">
@@ -287,7 +256,6 @@
         }
 
         function formSubmit() {
-            // console.log("form submitted")
 
             var formCuisine = document.querySelector("#formCuisine").value
             var formName = document.querySelector("#formName").value
@@ -300,25 +268,14 @@
             img: "assets/dosa.jpg"
         }
 
-        // console.log("inside fn formSubmit \n objToAppend: ", objToAppend)
-
             var localDishDB = JSON.parse(localStorage.getItem("localData"))
             localDishDB.push(objToAppend)
 
             localStorage.clear()
-        localStorage.setItem("localData", JSON.stringify(localDishDB));
+            localStorage.setItem("localData", JSON.stringify(localDishDB));
 
-            // console.log("saved to localStorage: ",objToAppend)
-
-            // document.querySelector("#formCuisine").value = ""
             document.querySelector("#formName").value = ""
             document.querySelector("#formPrice").value = ""
-
-            // get values from dom 
-            // make a object
-            // append to dishDD in local storage
-        //     fillDishesDD()
-        // displayData()
         }
     </script>
 </body>
